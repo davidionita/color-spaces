@@ -57,10 +57,10 @@
 
             var html = ""; 
 
-            for(var a = 0; a <= rows; a++) { 
+            for(var a = 1; a <= rows; a++) { 
                 html += '<tr>'; 
 
-                    for(var b = cols; b >= 0; b--) { 
+                    for(var b = cols; b >= 1; b--) { 
                         red = ( (a*pairs[0][0])%17 + (b*pairs[1][0])%17 ) % 17
                         green = ( (a*pairs[0][1])%17 + (b*pairs[1][1])%17 ) % 17
                         blue = ( (a*pairs[0][2])%17 + (b*pairs[1][2])%17 ) % 17
@@ -80,7 +80,7 @@
     <h2><strong><u>triplet</u></strong></h2>
 
     <p>Consider the linear combination: <strong>a</strong> < <input id="triplet-r1" type="text" size="2" class="triplet" value="0">, <input id="triplet-b1" type="text" size="2" class="triplet" value="0">, <input id="triplet-g1" type="text" size="2" class="triplet" value="0"> > + <strong>b</strong> < <input id="triplet-r2" type="text" size="2" class="triplet" value="0">, <input id="triplet-b2" type="text" size="2" class="triplet" value="0">, <input id="triplet-g2" type="text" size="2" class="triplet" value="0"> > + <strong>c</strong> < <input id="triplet-r3" type="text" size="2" class="triplet" value="0">, <input id="triplet-b3" type="text" size="2" class="triplet" value="0">, <input id="triplet-g3" type="text" size="2" class="triplet" value="0"> > </p>
-    <input type="range" id="c-slice" name="vol" min="0" max="16" value="8">
+    <input type="range" id="c-slice" name="vol" min="1" max="16" value="8">
 
     <table>
         <tbody id="tripletGrid">
@@ -137,10 +137,10 @@
 
             var html = ""; 
 
-            for(var a = 0; a <= rows; a++) { 
+            for(var a = 1; a <= rows; a++) { 
                 html += '<tr>'; 
 
-                    for(var b = cols; b >= 0; b--) { 
+                    for(var b = cols; b >= 1; b--) { 
                         red = ( (a*triplets[0][0])%17 + (b*triplets[1][0])%17 + (c*triplets[2][0])%17 ) % 17
                         green = ( (a*triplets[0][1])%17 + (b*triplets[1][1])%17 + (c*triplets[2][1])%17 ) % 17
                         blue = ( (a*triplets[0][2])%17 + (b*triplets[1][2])%17 + (c*triplets[2][2])%17 ) % 17
