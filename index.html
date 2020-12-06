@@ -17,11 +17,18 @@
 
     <p>Consider the linear combination: <strong>a</strong> < <input id="pair-r1" type="text" size="2" class="pair" value="0">, <input id="pair-b1" type="text" size="2" class="pair" value="0">, <input id="pair-g1" type="text" size="2" class="pair" value="0"> > + <strong>b</strong> < <input id="pair-r2" type="text" size="2" class="pair" value="0">, <input id="pair-b2" type="text" size="2" class="pair" value="0">, <input id="pair-g2" type="text" size="2" class="pair" value="0"> > </p>
 
+    <table>
+        <tbody id="pairGrid">
+        </tbody>
+    </table>
+
     <script>
         var pairs = [
             [0, 0, 0],
             [0, 0, 0]
         ]
+
+        pairVisualizer();
         
         // Update array based on inputs
         $(".pair").on("input", function() {
@@ -42,7 +49,33 @@
 
         // Actual function to create grid and compute linear combinations 
         function pairVisualizer() {
-            console.log(pairs);
+            document.getElementById('pairGrid').innerHTML = "";
+
+            var r = 0;
+            var g = 0;
+            var b = 0;
+
+            var cols = 16; 
+            var rows = 16; 
+
+            var html = ""; 
+
+            for(var a = 0; a <= rows; a++) { 
+                html += '<tr>'; 
+
+                    for(var b = cols; b >= 0; b--) { 
+                        red = ( (a*pairs[0][0])%17 + (b*pairs[1][0])%17 ) % 17
+                        green = ( (a*pairs[0][1])%17 + (b*pairs[1][1])%17 ) % 17
+                        blue = ( (a*pairs[0][2])%17 + (b*pairs[1][2])%17 ) % 17
+
+                        html += '<td style="background-color: rgb(' + red*16 + ', ' + green*16+ ', '  + blue*16 + ');" >' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + '</td>'; 
+                    } 
+
+                html += '</tr>'; 
+                console.log(html);
+            }
+
+            document.getElementById('pairGrid').innerHTML += html;
         }
 
     </script>
@@ -58,6 +91,8 @@
             [0, 0, 0],
             [0, 0, 0]
         ]
+
+        tripletVisualizer();
         
         // Update array based on inputs
         $(".triplet").on("input", function() {
