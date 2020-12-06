@@ -85,6 +85,12 @@
     <h2><strong><u>triplet</u></strong></h2>
 
     <p>Consider the linear combination: <strong>a</strong> < <input id="triplet-r1" type="text" size="2" class="triplet" value="0">, <input id="triplet-b1" type="text" size="2" class="triplet" value="0">, <input id="triplet-g1" type="text" size="2" class="triplet" value="0"> > + <strong>b</strong> < <input id="triplet-r2" type="text" size="2" class="triplet" value="0">, <input id="triplet-b2" type="text" size="2" class="triplet" value="0">, <input id="triplet-g2" type="text" size="2" class="triplet" value="0"> > + <strong>c</strong> < <input id="triplet-r3" type="text" size="2" class="triplet" value="0">, <input id="triplet-b3" type="text" size="2" class="triplet" value="0">, <input id="triplet-g3" type="text" size="2" class="triplet" value="0"> > </p>
+    <input type="range" id="c-slice" name="vol" min="0" max="16" value="8">
+
+    <table>
+        <tbody id="tripletGrid">
+        </tbody>
+    </table>
 
     <script>
         var triplets = [
@@ -92,6 +98,8 @@
             [0, 0, 0],
             [0, 0, 0]
         ]
+
+        var c = 8;
 
         tripletVisualizer();
         
@@ -115,9 +123,42 @@
             tripletVisualizer();
         });
 
+        // Update c slice of visualization based on slider range input
+        $("#c-slice").on("input", function() {
+            c = Number(this.value);
+            console.log(c);
+            tripletVisualizer();
+        });
+
         // Actual function to create grid and compute linear combinations 
         function tripletVisualizer() {
-            console.log(triplets);
+            document.getElementById('tripletGrid').innerHTML = "";
+
+            var r = 0;
+            var g = 0;
+            var b = 0;
+
+            var cols = 16; 
+            var rows = 16; 
+
+            var html = ""; 
+
+            for(var a = 0; a <= rows; a++) { 
+                html += '<tr>'; 
+
+                    for(var b = cols; b >= 0; b--) { 
+                        red = ( (a*triplets[0][0])%17 + (b*triplets[1][0])%17 + (c*triplets[2][0])%17 ) % 17
+                        green = ( (a*triplets[0][1])%17 + (b*triplets[1][1])%17 + (c*triplets[2][1])%17 ) % 17
+                        blue = ( (a*triplets[0][2])%17 + (b*triplets[1][2])%17 + (c*triplets[2][2])%17 ) % 17
+
+                        html += '<td style="background-color: rgb(' + red*16 + ', ' + green*16+ ', '  + blue*16 + ');" >' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + '</td>'; 
+                    } 
+
+                html += '</tr>'; 
+                console.log(html);
+            }
+
+            document.getElementById('tripletGrid').innerHTML += html;
         }
 
     </script>
